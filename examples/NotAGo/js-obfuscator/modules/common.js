@@ -1,0 +1,1 @@
+console['log']('I\x27m\x20common\x20JS!\x20I\x27m\x20ready\x20now!');var sw,sh;

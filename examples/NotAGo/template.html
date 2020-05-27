@@ -1,0 +1,130 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-language" content="en" />
+  
+  <!-- SEO -->
+  <title>Website</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+
+  <!-- Social Sharing Info -->
+  <meta property="og:url" content="__SHARING_URL__" />
+  <meta property="og:title" content="__SHARING_TITLE_GOES_HERE__" />
+  <meta property="og:description" content="__SHARING_DESCRIPTION_GOES_HERE__" />
+  <meta propertsy="og:image" content="" />
+  <meta property="og:image:width" content="1200" /> <!-- Full HD: WIDTH -->
+  <meta property="og:image:height" content="630" /> <!-- Full HD: HEIGHT -->
+  <meta property="fb:app_id" content="" />
+
+  <meta name="webroot" content="." />
+
+  <!-- Viewport and mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+
+  <!-- FAVICON -->
+  <link rel="image_src" href="./images/favicon.ico" />
+  <link rel="icon" type="image/gif" href="./images/favicon.ico" />
+
+  <!-- CSS: Stylesheet for the website -->
+  <!-- Generated CSS by Sass -->
+  <!-- <link rel="stylesheet" href="css/main.css"> -->
+  <!-- Pure CSS for backend backup -->
+  <!-- <link rel="stylesheet" href="css/pure.css"> -->
+
+  
+
+  
+</head>
+
+<body>
+    <script>
+        // Mobile Safari in standalone mode
+        if (("standalone" in window.navigator) && window.navigator.standalone) {
+
+            // If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
+            var noddy, remotes = true;
+
+            document.addEventListener('click', function (event) {
+
+                noddy = event.target;
+
+                // Bubble up until we hit link or top HTML element. Warning: BODY element is not compulsory so better to stop on HTML
+                while (noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                    noddy = noddy.parentNode;
+                }
+
+                if ('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+                    event.preventDefault();
+                    document.location.href = noddy.href;
+                }
+
+            }, false);
+        }
+    </script>
+    <header>
+        <!-- Thường chứa LOGO, MENU NAVIGATION,... -->
+        <nav>
+        <ul id="nav">
+          <li><a href="" class="active">Menu 1</a></li>
+          <li><a href="">Menu 2</a></li>
+          <li><a href="">Menu 3</a></li>
+          <li><a href="">Menu 4</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Your HTML here -->
+    <main id="pHome">
+        <div class="sample " data-abc="123">
+            Something goes here!
+            <br />Fix performance overloaded on Windows machine
+            <br />Chúng tôi là những chữ được viết bằng Tiếng Việt đây!
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+  <!-- Chứa footer -->
+  <span>Footer goes here</span>
+</footer>
+
+    <!-- POPUPS / MODALS -->
+    <!-- POPUP này được control (show/hide) bởi "main.js" -->
+    <!-- 
+        // Mở popup có class "register": 
+        POPUP.show("register"); 
+        // hoặc:
+        POPUP.show("register", callback);
+        
+        Tắt tất cả popup: 
+        POPUP.hide();
+    -->
+    <div id="popup" class="helper-hide">
+      <div class="holder helper-centerbox register">ABC</div>
+      <div class="holder helper-centerbox login">DEF</div>
+  </div>
+
+  <!-- Default PRELOADER with rotating circle -->
+  <!-- Được control bởi: /js/main.js -->
+  <!-- PRELOADER.show() -->
+  <!-- PRELOADER.hide() -->
+  <div id="preloader" class="helper-hide">
+      <div class="loader helper-centerbox">
+          <svg class="circular" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+          </svg>
+      </div>
+  </div>
+
+    <!-- Default JS files -->
+    <script type="text/javascript" async src="js/plugins/lazysizes/lazysizes.min.js"></script>
+    <script type="text/javascript" async src="js/main.js"></script>
+</body>
+
+</html>

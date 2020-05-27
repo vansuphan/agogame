@@ -1,0 +1,1 @@
+var sw,sh,pEmpty={init:function(){console.log("<pEmpty> => INIT!"),$(window).on("resize",pEmpty.onResize),pEmpty.onResize();var n=[path_resource+"js/plugins/TJS/TJS.js"];GLoader.loadScripts(n,{onComplete:function(n){pEmpty.start()}})},onResize:function(n){sw=$(window).width(),sh=$(window).height()},start:function(){}};
