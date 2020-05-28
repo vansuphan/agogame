@@ -38,14 +38,12 @@
       FB.init({
         appId: 672640736833599,
         // appId: 1093525944365848,
-        // cookie: true,
+        cookie: true,
         xfbml: true,
         version: 'v7.0'
       });
-  
       FB.AppEvents.logPageView();
-      // $(".fb-login-button").attr('onlogin', checkLoginState);
-      // console.log("init FB")
+      
     };
     (function (d, s, id) {
       
@@ -55,14 +53,15 @@
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  
+    
+
     function basicAPIRequest() {
       FB.api('/me',
         { fields: "id,picture,email,first_name,middle_name,name" },
         function (response) {
           //$("#fb-profile-picture").append('<img src="' + response.picture.data.url + '"> ');
           dataLoginFB = response;
-          
+          console.log(response);
           if(data.filter((value)=>{
             return value.Fb_id === response.id;
           }).length === 0){
@@ -83,25 +82,24 @@
             playerInfo = response;
           }
           
-  
         }
       );
      
     }
-  
+   
     function getPlayer () {
       return playerInfo
     }
     
     function init() {
       // PRELOADER.show();
-      $("#facebook").on('click mousedown touchstart', function (e) {
-        // login();
-      });
+      // $("#facebook").on('click mousedown touchstart', function (e) {
+      //   // login();
+      // });
   
-      $("#load").on('click mousedown touchstart', function (e) {
-        loadData();
-      });
+      // $("#load").on('click mousedown touchstart', function (e) {
+      //   loadData();
+      // });
   
       // $(".fb-login-button").attr('onlogin', checkLoginState);
   
@@ -109,9 +107,75 @@
       //     logout();
       // });
       // if ()
-      checkLoginState();
-      var holderLoader = document.querySelector('.hoder-loader');
-      holderLoader.setAttribute("style","display : none");
+
+      // checkLoginState();
+      // var holderLoader = document.querySelector('.hoder-loader');
+      // holderLoader.setAttribute("style","display : none");
+
+      FBInstant.initializeAsync()
+        .then(function(){
+           // Start loading game assets here
+          var progress = 0;
+          var interval = setInterval(function () {
+            progress +=1;
+            FBInstant.setLoadingProgress(progress);
+            if(progress >= 99){
+              clearInterval(interval);
+              FBInstant.startGameAsync()
+                .then(function () {
+                
+                  // var contextId = FBInstant.player.getID();
+                  var contextType = FBInstant.context.getType();
+
+                  var playerName = FBInstant.player.getName();
+                  var playerPic = FBInstant.player.getPhoto();
+                  var playerId = FBInstant.player.getID();
+
+                  var dataImage = {
+                    height: 50,
+                    url: playerPic,
+                    width: 50,
+                  }
+
+                  dataLoginFB = {
+                    email: "",
+                    id: playerId,
+                    name: playerName,
+                    picture : {
+                      data : dataImage 
+                    }
+                  }
+
+                  console.log(dataLoginFB);
+
+                  if(data.filter((value)=>{
+                    return value.Fb_id === playerId;
+                  }).length === 0){
+          
+                    PostUser(urlAPI + 'user');
+                    var evt = $.Event(Events.LOGIN);
+                    evt.playerInfo = dataLoginFB;
+                    
+                    //playerInfo = response;
+                    $(GameController).trigger(evt);
+                    
+          
+                  }else{
+                    var evt = $.Event(Events.LOGIN);
+                    //console.log("Da login 2222222");
+                    evt.playerInfo = dataLoginFB;
+                    $(GameController).trigger(evt);
+                    playerInfo = dataLoginFB;
+                  }
+                  //checkLoginState();
+                });
+            }
+          },20);
+        }
+       
+      );
+
+
     }
   
   
@@ -123,9 +187,11 @@
       FB.getLoginStatus(function (response) {
         
         if (response.status != "connected") {
-          console.log("LOG", response.status)
+          console.log("LOG", response.status);
           login();
-        }else{
+          //loadData();
+        }
+        else{
           loadData();
         }
        
@@ -151,6 +217,11 @@
       else
       {
         _isLoadData = true;
+
+        
+
+
+        //console.log(FBInstant.player.getConnectedPlayersAsync());
         basicAPIRequest();
       }
       // basicAPIRequest()
@@ -189,7 +260,7 @@
    
   
     function PostUser(URL = urlAPI + 'user') {
-      console.log(dataLoginFB);
+      //console.log(dataLoginFB);
       $.ajax({
         url: URL,
         type: 'POST',

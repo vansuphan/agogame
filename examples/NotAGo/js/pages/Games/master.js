@@ -16,7 +16,10 @@
     }
     $(GameController).on(GameController.Events.LOGIN, function(){
         console.log("Master GameController GameController.Events.LOGIN");
+        
         init();
+        
+
     });
 
 
@@ -50,32 +53,29 @@
         changeSceneById(0);
 
         update();
-        //console.log("init game")
+
+        console.log("init game");
         // var holderLoader = document.querySelector('.hoder-loader');
         // holderLoader.setAttribute("style","display : none");
-    //     FBInstant.startGameAsync()
-    //     .then(function() {
-      
-    //     // once startGameAsync() resolves
-    //     var contextId = FBInstant.context.getID();
-    //     var contextType = FBInstant.context.getType();
-  
-    //     var playerName = FBInstant.player.getName();
-    //     var playerPic = FBInstant.player.getPhoto();
-    //     var playerId = FBInstant.player.getID();
+        /*FBInstant.startGameAsync()
+        .then(function() {
+        
+            var contextId = FBInstant.context.getID();
+            var contextType = FBInstant.context.getType();
+            var playerName = FBInstant.player.getName();
+            var playerPic = FBInstant.player.getPhoto();
+            var playerId = FBInstant.player.getID();
 
-  
-    //     console.log("contextId : ", contextId);
-    //     console.log("contextType : ", contextType);
-    //     console.log("playerName : ", playerName);
-    //     console.log("playerPic : ", playerPic);
-    //     console.log("playerId : ", playerId);
-    //     var holderLoader = document.querySelector('.hoder-loader');
-    //     holderLoader.setAttribute("style","display : none");
-    //   });
-        // FBInstant.startGameAsync()
-        // .then(function() {
-        // });
+            console.log("contextId : ", contextId);
+            console.log("contextType : ", contextType);
+            console.log("playerName : ", playerName);
+            console.log("playerPic : ", playerPic);
+            console.log("playerId : ", playerId);
+
+            // var holderLoader = document.querySelector('.hoder-loader');
+            // holderLoader.setAttribute("style","display : none");
+      });*/
+     
     }
 
     function update(e) {
